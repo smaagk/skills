@@ -42,7 +42,7 @@ then record.
 
 5. **Report, don't narrate.** Files changed · proof command and captured
    output · decisions taken by precedent (which precedent) · Parked ·
-   Stopped-at (if any). No progress story, no restated spec.
+   Stopped-at (if any, in /sbar form). No progress story, no restated spec.
    _Done when_: a reviewer can re-run the proof from the report alone.
 
 ## Deciding without asking

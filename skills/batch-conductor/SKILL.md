@@ -96,7 +96,8 @@ alternativas, decisión, confianza y condición de reconsideración. Jerarquía 
 desempate: seguridad/RLS → ACs del issue → comportamiento comprobado → dominio →
 patrones del repo → alcance mínimo → reversibilidad → acoplamiento → paridad
 web/móvil → estética. Consulta al usuario SOLO si (las tres): no inferible +
-comportamientos de negocio materialmente distintos + error costoso/irreversible.
+comportamientos de negocio materialmente distintos + error costoso/irreversible —
+y la consulta, como todo handoff o HELP, va en forma `/sbar`.
 
 Publica el diseño como comentario del issue antes de implementar (deja rastro y
 cambia el label de triage). Actualiza el glosario (`CONTEXT.md`) solo con términos de
@@ -172,6 +173,9 @@ lote autónomo eso se vuelve scope creep si no se acota:
   por encima de 1000 líneas (el ~800 de Fase 0 avisa; 1000 bloquea), condicional
   ad hoc en un flujo compartido, y checks de feature dispersos en código
   compartido. El resto son directivas si son baratas y nits si no.
+- Todo judo o bloqueador que ELIMINE algo existente (guard, rama, flag,
+  política, helper) pasa antes por `/chestertons-fence`: sin builder conocido o
+  razón expirada con locator, el movimiento baja a nit.
 - Un movimiento de judo DENTRO de las superficies del issue se aplica ahora:
   viaja literal al `resume` de Codex como directiva obligatoria. Uno que cruza a
   superficies congeladas o compartidas NUNCA entra en el PR del issue: `bd

@@ -129,6 +129,8 @@ When you identify a code-quality problem, prefer suggestions like:
 - Parallelize independent work when that also simplifies the orchestration.
 - Restructure related updates into a more atomic flow when partial state would be harder to reason about.
 
+Before recommending that an existing guard, branch, flag, or helper be deleted, apply `/chestertons-fence`: name its builder and why the reason expired, or downgrade the finding to a question.
+
 Do not be satisfied with "maybe rename this" feedback when the real issue is structural.
 Do not be satisfied with a merely cleaner version of the same messy idea if there is a plausible path to a much simpler idea.
 

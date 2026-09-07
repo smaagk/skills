@@ -26,6 +26,8 @@ diseña, revisa y es la única mano en git/GitHub; **GPT-6 Astra** (Codex CLI) y
 | [`opus-first`](skills/opus-first/SKILL.md) | Ruteo de implementación con juicio a subagentes Opus 5 (heredan el harness: CLAUDE.md, skills, MCP). |
 | [`opus-research`](skills/opus-research/SKILL.md) | Research de código con scouts Opus 5: Fable briefa, el scout lee y cita `path:line`, Fable debriefa. |
 | [`frictionless-focus`](skills/frictionless-focus/SKILL.md) | Disciplina de la mano que implementa: una unidad, una prueba, tangentes estacionadas, decisiones por precedente sin preguntas. Los workers (Opus o Codex) la cargan al recibir una spec congelada. |
+| [`chestertons-fence`](skills/chestertons-fence/SKILL.md) | Antes de quitar o rodear código existente: nombrar la cerca, encontrar al constructor (cita inline, `git log -S`, PR/issue, ADR, wiki), veredicto holds/expired/unknown, dejar marcador rastreable. El Juez B la aplica antes de proponer borrar. |
+| [`sbar`](skills/sbar/SKILL.md) | Handoff entre agentes o sesiones en cuatro bloques: Situation, Background, Assessment, Recommendation. Para `gt handoff`, HELP al Witness, notas de bead antes de morir y el Stopped-at de un reporte. |
 | [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Rúbrica de revisión estructural extrema (judo de código, megaarchivos, spaghetti). Lleva `disable-model-invocation`: se lee y se aplica, no se invoca. |
 
 ## Instalar
