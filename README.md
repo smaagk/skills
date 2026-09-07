@@ -48,6 +48,20 @@ entrenamiento del modelo, convertido en pasos con criterio de terminado.
 | [`five-whys`](skills/five-whys/SKILL.md) | Ohno | Lecciones que registran el síntoma y no la causa |
 | [`one-way-doors`](skills/one-way-doors/SKILL.md) | Bezos | Preguntar de más en lo reversible y de menos en lo irreversible |
 
+## Planear y hacer spikes
+
+Mismo corte: agnósticas del harness, un principio con nombre, pasos con criterio de terminado.
+
+| Skill | Principio | Corrige |
+|---|---|---|
+| [`working-backwards`](skills/working-backwards/SKILL.md) | Amazon | Planes escritos hacia adelante que acumulan pasos innecesarios |
+| [`outside-view`](skills/outside-view/SKILL.md) | Kahneman, planning fallacy | Estimar desde el plan y no desde la clase de referencia |
+| [`rolling-wave`](skills/rolling-wave/SKILL.md) | Fog of war | Detallar lo que aún no se sabe y reescribirlo después |
+| [`critical-path`](skills/critical-path/SKILL.md) | Goldratt | Paralelizar y rescatar pasos que no están en la cadena crítica |
+| [`spike`](skills/spike/SKILL.md) | XP | Código escrito para aprender que termina en producción |
+| [`tracer-bullet`](skills/tracer-bullet/SKILL.md) | Pragmatic Programmer | Construir una capa entera antes de tocar la siguiente |
+| [`riskiest-assumption`](skills/riskiest-assumption/SKILL.md) | Lean | Probar al final la creencia que podía matar el plan al principio |
+
 ## Instalar
 
 Copia las carpetas que quieras a `.claude/skills/` de tu repo (o a `~/.claude/skills/` para uso global):
