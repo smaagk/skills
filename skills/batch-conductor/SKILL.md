@@ -108,7 +108,9 @@ trade-off real).
 La spec incluye: objetivo, rutas y patrones de referencia (con ejemplos del repo),
 comportamiento actual/esperado, casos felices/error/vacíos, roles y RLS, UX es-MX,
 restricciones, **no-objetivos explícitos**, pruebas exactas (comandos literales),
-formato del reporte, y un **bloque «Guía de campo»** al inicio: los hallazgos de la
+formato del reporte, la orden de leer y seguir `/frictionless-focus` (la
+disciplina de la mano: una unidad, una prueba, tangentes estacionadas), y un
+**bloque «Guía de campo»** al inicio: los hallazgos de la
 bitácora y `bd memories` aplicables a ESTA superficie (no toda la bitácora — el
 extracto filtrado). Reglas duras aprendidas:
 

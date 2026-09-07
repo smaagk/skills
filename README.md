@@ -9,8 +9,8 @@ diseña, revisa y es la única mano en git/GitHub; **GPT-6 Astra** (Codex CLI) y
 |---|---|---|---|
 | Orquestador / arquitecto / spec | Fable 5.1 | n/a | `orchestrate-opus`, `batch-conductor` |
 | Research de código (scouts) | Opus 5 | n/a | `opus-research` |
-| Worker mecánico (spec congelada) | GPT-6 Astra vía Codex | `high` (`xhigh` duro) | `codex-first` |
-| Worker de juicio (contratos, RLS, UX, MCP) | Opus 5 | n/a | `opus-first` |
+| Worker mecánico (spec congelada) | GPT-6 Astra vía Codex | `high` (`xhigh` duro) | `codex-first` + `frictionless-focus` |
+| Worker de juicio (contratos, RLS, UX, MCP) | Opus 5 | n/a | `opus-first` + `frictionless-focus` |
 | Lente spec | Sonnet 5 | n/a | `batch-conductor` Fase 3 |
 | Juez A (código) | GPT-6 Astra, Codex en modo lectura | `high` | `batch-conductor` Fase 3 |
 | Juez B (estructura) | Fable 5.1 / Opus 5 | n/a | `thermo-nuclear-code-quality-review` como rúbrica |
@@ -25,6 +25,7 @@ diseña, revisa y es la única mano en git/GitHub; **GPT-6 Astra** (Codex CLI) y
 | [`codex-first`](skills/codex-first/SKILL.md) | Ruteo de implementación a Codex CLI (GPT-6 Astra) con spec congelada; Claude verifica. Modelo y effort siempre explícitos. |
 | [`opus-first`](skills/opus-first/SKILL.md) | Ruteo de implementación con juicio a subagentes Opus 5 (heredan el harness: CLAUDE.md, skills, MCP). |
 | [`opus-research`](skills/opus-research/SKILL.md) | Research de código con scouts Opus 5: Fable briefa, el scout lee y cita `path:line`, Fable debriefa. |
+| [`frictionless-focus`](skills/frictionless-focus/SKILL.md) | Disciplina de la mano que implementa: una unidad, una prueba, tangentes estacionadas, decisiones por precedente sin preguntas. Los workers (Opus o Codex) la cargan al recibir una spec congelada. |
 | [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Rúbrica de revisión estructural extrema (judo de código, megaarchivos, spaghetti). Lleva `disable-model-invocation`: se lee y se aplica, no se invoca. |
 
 ## Instalar

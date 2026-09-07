@@ -60,8 +60,9 @@ Prompt contract (subagents start fresh — no conversation inheritance): goal,
 exact repo paths, constraints ("don't touch X"), non-goals, proof expected
 (exact test command), output shape ("report files changed + test output").
 Thinner than a Codex spec — skip what CLAUDE.md and repo skills already say;
-DO name which repo skills to load (e.g. "load /data-access-service before
-writing the service").
+DO name which repo skills to load — always /frictionless-focus (the hands'
+discipline: one unit, one proof, tangents parked), plus the surface's skill
+(e.g. "load /data-access-service before writing the service").
 
 Shared resources stay Fable's: if the environment has global state (one DB
 container, one emulator), forbid the agent from touching it ("do NOT run

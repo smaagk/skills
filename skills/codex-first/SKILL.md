@@ -66,7 +66,8 @@ Follow-up fixes — cheaper than fresh runs, keeps context. `resume` has no `-C`
 
 ## Prompt contract
 
-Codex starts with zero session context. Every prompt: goal, exact repo/paths, constraints, non-goals, proof expected (exact test command), output shape ("report files changed + test output"). Spec quality decides success.
+Codex starts with zero session context. First line of every prompt: `Read
+.claude/skills/frictionless-focus/SKILL.md and follow its Steps.` Then: goal, exact repo/paths, constraints, non-goals, proof expected (exact test command), output shape ("report files changed + test output"). Spec quality decides success.
 
 ## Verify (Claude, always)
 
