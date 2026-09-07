@@ -198,15 +198,24 @@ If those conditions are not met, leave explicit, actionable feedback and push fo
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Apply this rubric to the export diff; preserve its behavior.”
+**Request:** “Review the upload-panel diff for structural quality.”
 
-Suppose `src/export.ts:240` adds a third format switch to a file growing
-from 940 to 1,080 lines. All three switches choose the same columns, and
-`src/columns.ts:18` already owns that mapping. A useful finding is:
-“Reuse the canonical column map and keep format serialization at the
-export boundary; this removes two decisions rather than moving three
-switches into helpers.” Cite those locations and the existing behavior
-fixtures for each format. Investigate any legacy branch's origin before
-recommending deletion. Treat the line threshold as supporting evidence;
-the actionable problem is duplicated ownership and branching, not merely
-the file's length. Report a proposal, not an unperformed refactor.
+Evidence in `src/upload-panel.ts:90`: the diff adds `retrying` alongside
+`uploading`, `failed`, and `complete`. Render and retry handlers now each
+resolve combinations such as `failed && complete`. Moving those conditions
+into four helpers would distribute the same ambiguity.
+
+A useful finding proposes one state owned at the upload boundary:
+
+```text
+idle → uploading → complete
+                 → failed → uploading (retry)
+```
+
+Cite the duplicate decisions and require transition tests: a successful
+retry clears the prior error; a failed retry never displays completion.
+If the product legitimately shows a completed earlier upload while another
+runs, one global state would erase behavior. Model state per upload, or
+revise the finding after checking ownership. The simplification is justified
+by mutually exclusive states for one upload, not by a general preference
+for fewer booleans. Report this as a review proposal, not a performed fix.

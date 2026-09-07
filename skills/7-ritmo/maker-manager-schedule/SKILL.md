@@ -33,14 +33,21 @@ finish in a minute anyway.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Review the authorization diff while CI is running.”
+**Request:** “Review a state transition while a build runs in the background.”
 
-Label reading the policy and tracing tenant isolation as maker work;
-checking CI, the review queue, and status notifications as manager work.
-If nothing requires an immediate reaction, start a closed maker block
-whose endpoint is a completed role-by-role review. Let CI produce a
-notification without polling it between policy branches. At the block's
-end, read CI and the queue in one sweep, record or dispatch each required
-follow-up, then start the next review block. If a release requires an
-immediate decision, handle that before beginning a block that cannot stay
-uninterrupted.
+The review must establish whether cancellation can race with completion.
+Reading half a transition, polling the build, and returning from memory
+risks missing exactly that ordering. Separate the work:
+
+```text
+maker block: trace cancel → callback → final state; record the race verdict
+manager sweep: read build result and queued status requests; resolve or route them
+maker block: review the next independent transition
+```
+
+A routine build-complete notification waits for the sweep; the review ends
+at its recorded verdict. If the build result is required to choose which
+transition to inspect, it is a dependency: obtain it before starting the
+block. If an urgent production incident arrives, deliberately suspend the
+review with a marker and handle it. That interruption changes priorities;
+it is not permission to keep polling unrelated monitors mid-review.

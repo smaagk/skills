@@ -32,14 +32,22 @@ sample and "no one has complained" is a set of survivors.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “All uploaded CSVs look valid in our logs. Is import coverage enough?”
+**Request:** “All 100 signup-complete events show successful email delivery.
+Can we call onboarding reliable?”
 
-Selection: these logs are emitted only after parsing succeeds. They omit
-files rejected by the decoder, rows that crash parsing, and users who
-abandon before upload. Add an invalid-encoding fixture at
-`tests/fixtures/invalid-encoding.csv`, an unterminated-quote fixture at
-`tests/fixtures/unterminated.csv`, and an upload-cancel test at
-`tests/upload-cancel.spec.ts`. Verify the first two surface controlled
-errors and cancellation leaves no partial import. The successful-import
-logs still support the happy path; they cannot support a claim about
-inputs that never reached the logging statement.
+Selection: the event is emitted only after delivery succeeds. The 100/100
+result describes survivors. It cannot reveal a failure before that line.
+
+```text
+attempt log:      120 signup attempts with distinct correlation IDs
+completion log:   100 matching IDs
+missing set:       20 attempts without completion
+```
+
+Query the missing IDs, then distinguish errors, cancellations, and requests
+still in progress. Suppose 12 timed out at the mail provider and 8 were
+cancelled. Add a provider-timeout test at `tests/signup-timeout.spec.ts`
+and a cancellation test at `tests/signup-cancel.spec.ts`; check the user
+sees a recoverable state and neither case emits completion. Do not label
+all 20 as delivery failures. Without an attempt record, the denominator
+is unknown: add evidence before reporting a success rate.

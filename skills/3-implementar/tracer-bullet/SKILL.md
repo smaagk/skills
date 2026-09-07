@@ -31,13 +31,19 @@ the first real version, thin enough to see where it lands.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Build a maintenance-request form that saves to storage.”
+**Request:** “Build a note form that saves and reloads its contents.”
 
-Pick one path: entering “Leaking tap” and submitting produces a persisted
-request with that title, then shows its ID. Layers: form → client service
-→ endpoint → database → confirmation. Implement the minimum real path in
-each layer, retaining the required authentication and authorization, and
-run one integration test through it. This code stays in the delivery
-branch. Extend that same path with validation errors, network failures,
-and the empty description case in subsequent changes. Do not build every
-form option first or substitute a mock database for the path being proven.
+Tracer: enter “Buy milk” → form → client → endpoint → storage → returned
+ID → reload that ID and display “Buy milk”. Use real storage in the test
+environment and retain the required access checks. One acceptance test
+submits, reloads, and compares the text.
+
+A form that displays “Saved” after a mocked response can pass a UI test
+while this tracer fails. Suppose the reload returns “not found”: resolve
+the ID or persistence boundary before adding tags, attachments, or rich
+text. Those features would only widen an unproven path.
+
+Once reload passes, this implementation stays; extend it with validation,
+network errors, and planned fields. If the only question is whether a
+storage SDK works at all and the code will be discarded, use a spike
+instead. Keeping the code and proving the full path distinguish the tracer.

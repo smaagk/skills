@@ -32,13 +32,21 @@ change course — are highest at the start and only fall.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Order today's work: tenant isolation, a loading label, and docs.”
+**Request:** “Order three tasks: rename 40 labels, check browser microphone
+support, and update the recording guide.”
 
-On a 0–3 scale, tenant isolation has unknowns 3 / blast radius 3; docs
-have 1 / 1; the loading label has 0 / 0. Tenant isolation is the frog.
-Start with its cross-tenant request check, not the label as a warm-up.
-Suppose that check reveals the cache key lacks a tenant component.
-Resolve the key ownership question and record how it changes the plan;
-then finish isolation before documentation and the label. The order is
-based on uncertainty and downstream consequences, not simply which item
-has the largest estimated line count.
+| Item | Unknowns, 0–3 | Downstream impact, 0–3 |
+|---|---:|---:|
+| Rename labels using an existing mapping | 0 | 0 |
+| Verify microphone capture in the supported browser | 3 | 3 |
+| Update the guide | 1 | 1 |
+
+The 40-file rename looks substantial but is mechanical. Start the microphone
+check: it can invalidate both the recording flow and its guide. Suppose
+capture works only after a user gesture; record that result and update the
+planned start interaction before drafting the guide. Rename labels last.
+
+If the supported-browser fixture already proves the exact capture flow,
+that item no longer carries three unknowns. Rescore it rather than treating
+“browser support” as the permanent frog. The priority comes from current
+uncertainty and its consequences, not the task's intimidating name.

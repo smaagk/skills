@@ -57,13 +57,22 @@ behaviours, expensive to undo — and ask once, with the options laid out.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Implement the agreed empty state for the invoice list.”
+**Request:** “Implement the frozen attachment-list empty state. Keep the
+agreed copy and do not redesign uploads.”
 
-Frame the unit: empty results show the agreed message; proof is
-`npm test -- invoice-list`; no filter redesign. Run the proof first, then
-read `src/invoice-list.ts:48`, its test, and the existing empty-state
-pattern in `src/payment-list.ts:35`. Follow that pattern for markup and
-accessibility, add the empty-result assertion, and capture a fresh passing
-run. An unrelated duplicated filter helper becomes a parked finding with
-its location. The report lists the two changed files, proof output,
-precedent, and parked helper; it does not reopen the frozen message copy.
+`npm test -- attachment-list` starts red: expected the empty message,
+received a blank panel. The spec omits markup, but
+`src/comment-list.ts:35` already uses the shared `EmptyState` component.
+Reuse that precedent and record it instead of asking which component to use.
+
+Two discoveries lead to different decisions:
+
+| Evidence | Action |
+|---|---|
+| `src/upload-progress.ts:70` duplicates percentage formatting | Park it; the empty state does not depend on it |
+| The list exposes both “loading” and “loaded with zero items” as `[]` | Stop at the missing state distinction if no canonical loading state exists |
+
+In the second case, a timer that guesses when loading finished would hide
+a design problem. Report that blocker with the red proof. If an existing
+loading signal resolves it, use that signal and finish with a fresh green
+run; no new design decision is needed.

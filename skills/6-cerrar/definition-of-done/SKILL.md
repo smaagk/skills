@@ -40,14 +40,23 @@ temp files). No prose.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Can we close this invoice-export change?”
+**Request:** “CI is green. Can we close the keyboard-navigation change?”
 
-The project already requires lint, the export acceptance test, a build,
-an attached CSV fixture, and an updated issue. Its single
-`DEFINITION_OF_DONE.md` points to the exact commands and inspection steps;
-the PR template links to that file. Run each line and capture results.
-Suppose lint, build, fixture inspection, and issue status pass, but
-`npm run test:export` fails on the empty result. Report “done except the
-empty-export acceptance check” and leave the work open. After repairing
-that case and checking all applicable lines, close against the same
-checklist instead of inventing a shorter one in the report.
+The repo disagrees with itself:
+
+| Source | Requirement | Evidence of authority |
+|---|---|---|
+| PR template | Unit tests pass | Old copy, last updated before accessibility policy |
+| CONTRIBUTING.md | Unit tests and keyboard walkthrough pass | Current policy, added by PR #64 |
+| CI | Unit tests pass | Keyboard walkthrough is explicitly manual in PR #64 |
+
+Green CI satisfies only part of the current policy. Consolidate both
+checks in `DEFINITION_OF_DONE.md`: `npm test -- navigation`, plus open the
+menu by keyboard, reach each item, press Escape, and verify focus returns
+to the trigger. Replace duplicated criteria in the template and contributing
+docs with a pointer; keep CI executing its automated check.
+
+Suppose Escape loses focus: report the failed walkthrough and leave the
+change open. If the policies' authority were unresolved, surface that
+specific conflict rather than choosing the shortest checklist. One source
+of truth cannot be created by quietly discarding a live requirement.

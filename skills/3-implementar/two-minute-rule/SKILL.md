@@ -37,13 +37,19 @@ Fail any one → park it.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “While fixing the empty state, I found a misspelled test label
-and a helper that mishandles nulls.”
+**Request:** “While fixing a download button, I found two one-line changes.”
 
-For the label: one obvious single-file edit, yes; existing proof covers
-it, yes; no other behavior changes, yes; no separate review explanation,
-yes. Correct it and record “two-minute: corrected empty-state test label.”
-For the null helper: a fix needs a new regression case and may change
-other callers, so the proof and behavior checks are no. Park it with its
-location and return to the empty state. Its small line count does not
-make it a two-minute fix.
+The first is “Dowload” → “Download” in the component already under test.
+The current failing accessible-name assertion expects “Download”. The second
+is adding `?? 0` to a shared size calculation to suppress a null error.
+
+| Check | Button label | Shared calculation |
+|---|---|---|
+| One file, obvious edit, no design choice | Yes | No: does null mean zero or unknown? |
+| Existing proof covers the change | Yes | No: needs a null-size case |
+| Other cases keep their behavior | Yes | No: other callers share the helper |
+| No separate review explanation needed | Yes | No: changes missing-data semantics |
+
+Fix the label and record it as a two-minute edit. Park the calculation
+with its location. Both edits occupy one line; only the first costs no
+new behavioral decision.

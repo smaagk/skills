@@ -34,13 +34,23 @@ lands.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Plan a migration from legacy exports with an unknown schema.”
+**Request:** “Plan an importer for sensor archives we have not inspected.”
 
-Milestones: representative files are understood (field inventory checked
-against samples); conversion preserves required data (reconciliation
-passes); consumers can use the new format (acceptance check passes).
-Detail only the first wave: inspect `samples/export-a.csv` and
-`samples/export-b.csv`, list headers and nulls, and compare the inventory
-with both files. Do not choose the converter's implementation yet. If the
-samples reveal two schema versions, record that discovery, split the
-conversion milestone by version, and detail the next wave from those facts.
+Milestones: understand supported formats (sample inventory complete),
+preserve readings (reconciliation passes), expose them to users (acceptance
+check passes). Detail only the inventory wave: read each supplied sample's
+header and rows, group formats, and check every sample against the inventory.
+
+Suppose it reveals:
+
+```text
+samples/a.csv: timestamp,temperature_c
+samples/b.csv: recorded_at,temperature_f
+```
+
+A detailed plan for “rename the timestamp field and copy temperatures” would
+already be wrong. Split the reconciliation milestone by schema and require
+known equivalent temperatures to converge. Now detail the conversion wave.
+If a later archive introduces a third schema, reopen the inventory check
+before extending conversion; the milestone's proof, not its place in the
+original plan, determines whether it has been reached.

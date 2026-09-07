@@ -41,13 +41,21 @@ the essential completely, not the most that fits.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Scope a first release with CSV export, charts, scheduled
-emails, and themes. Recommend what belongs in it.”
+**Request:** “Propose the first release of a podcast editor: trimming,
+transcripts, themes, and direct publishing.”
 
-Criterion: “Can an administrator reconcile this month's invoices without
-retyping them?” Score CSV export 100, charts 45, scheduled emails 30, and
-themes 5. Propose CSV export alone: date range, required columns, and a
-check against known invoice totals. Record the other three as no, with
-their scores and reasons in the scope proposal. A generic report builder
-is unnecessary for that yes. These scores support the proposed scope;
-they do not silently cancel requirements the requester already committed to.
+Criterion: “Can a producer remove a mistake and export a playable episode?”
+Candidate scores are judgments against that criterion, not measured benefits:
+
+| Candidate | Score | Scope decision |
+|---|---:|---|
+| Trim and export | 100 | Yes: remove a marked interval and verify playback |
+| Transcript editing | 70 | No: useful navigation, but timestamps suffice here |
+| Themes | 10 | No: does not change the audio result |
+| Direct publishing | 60 | No: the producer can upload the exported file |
+
+The tempting “smallest release” is a trim preview with no export. It fails
+the criterion despite being smaller. Keep the complete trim-to-file path,
+and record the three exclusions in the proposal. If the request instead
+requires transcript-based editing for accessibility, reassess that item;
+the original score does not justify silently dropping the requirement.

@@ -33,14 +33,19 @@ disappears, then what changes, and only then what is added.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Simplify the export service without changing its API.”
+**Request:** “Simplify notification delivery while preserving retries.”
 
-Candidates: `src/export.ts:18`, a wrapper that only forwards to the
-serializer; `src/export.ts:42`, two identical branches; and
-`src/export.ts:70`, a retry guard. Remove the wrapper and collapse the
-branches one at a time, rerunning the export fixtures after each. Keep
-the retry guard because the transient-failure case still needs it. Only
-then consider additions: none are required if the direct serializer call
-preserves the API. Report the retained guard and the net change, for
-example −24 lines, alongside the passing checks. A smaller diff alone
-would not justify removing retry behavior.
+Evidence: `src/notify.ts:18` is a private wrapper that forwards unchanged
+to `send`; both branches at `:42` call that wrapper with identical inputs.
+The guard at `:70` suppresses duplicate delivery after a retry. The tempting
+refactor adds a dispatcher class and moves all three decisions into it.
+
+Instead, remove the wrapper and collapse the identical branches, one at a
+time. Run `npm test -- notifications` after each, including the duplicate
+retry fixture. Keep the guard: its builder citation, issue #31, describes
+a still-supported retry sequence and the fixture reproduces it. No new
+abstraction is needed; the example diff removes 24 lines.
+
+If one branch also records an audit event, the “identical behavior” claim
+is false. Keep or explicitly preserve that event before collapsing the
+branches. Similar-looking calls are candidates for subtraction, not proof.

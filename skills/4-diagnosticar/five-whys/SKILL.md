@@ -34,14 +34,21 @@ teaches them to prevent it.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Our integration job has hung three times this week. Record a lesson.”
+**Request:** “Three integration jobs timed out waiting for their fixture
+server. Should we double the timeout?”
 
-Observed symptom: three jobs timed out after 10 minutes. Chain the evidence:
-why no exit? A test waits for a server response (`logs/job-3.txt:80`). Why
-no response? Its fixture server never started (`logs/job-3.txt:12`). Why
-not? The port was occupied by a prior fixture process (`logs/ports.txt:2`).
-Why did that process remain? Cleanup runs only on success
-(`tests/server-fixture.ts:44`). Stop at that controllable default. Propose
-cleanup in a finally block and verify a failing test releases the port.
-The lesson leads with “fixture cleanup skipped failure paths,” retaining
-“10-minute timeout” as the recognition symptom.
+Follow the evidence instead of the proposed fix:
+
+| Why? | Observed answer and locator |
+|---|---|
+| Why did the jobs time out? | Server readiness never arrived; `logs/job-3.txt:80` |
+| Why was the server not ready? | Bind failed with `EADDRINUSE`; `logs/job-3.txt:12` |
+| Why was the port occupied? | A prior fixture process still owned it; `logs/ports.txt:2` |
+| Why did it survive? | Cleanup is after an assertion that threw; `tests/server-fixture.ts:44` |
+
+Stop at the cleanup placement, a default we control. Verify that a failing
+test leaves the process alive, then move cleanup into a finally block and
+verify process exit and port release. Increasing the timeout would only
+wait longer for the same occupied port. If the process-owner evidence is
+missing, the third link is a hypothesis: collect it before recording
+“cleanup caused the hang” as a lesson.

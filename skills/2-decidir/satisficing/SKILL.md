@@ -32,13 +32,17 @@ looking, or the search never ends.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Choose a date formatter for these receipts.”
+**Request:** “Choose search for our 200-page internal handbook.”
 
-Before looking, write the threshold: Spanish month names, an explicit
-Mexico City timezone, correct day around UTC midnight, and no additional
-runtime dependency. Evaluate the platform formatter already used by the
-repo first. Suppose its output passes the locale and boundary fixtures;
-choose it and stop. Record “1 option examined; all four criteria pass.”
-Do not claim other libraries were rejected or build a comparison matrix
-for options never inspected. If the boundary fixture fails, continue to
-the next cheapest option using the same threshold.
+Before evaluating options, set pass/fail criteria: all 12 named lookup
+queries return their target page in the first five results, access remains
+private, and editors can maintain the index without another service.
+Suppose the static site's existing search passes all three. Stop and
+record “one option examined; 12/12 lookup queries pass.” A vector-search
+comparison might be interesting, but it would not change this decision.
+
+If the agreed query set includes misspellings and existing search passes
+only 8/12, it fails: evaluate the next cheapest option against the same
+threshold. Do not remove four queries after seeing the result to make the
+incumbent pass. A later, genuinely new requirement can reopen the choice;
+that is different from never finishing the current search.

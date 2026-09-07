@@ -30,16 +30,21 @@ and a one-line marker removes most of it.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Pause the export fix to answer a build-status question.”
+**Request:** “Answer a status question halfway through a failing parser test.”
 
-Before switching, write the marker:
+“Resume parser work” is too vague: the edit is already made, but its effect
+has not been checked. Write the boundary precisely before switching:
 
 ```text
-Invoice export; header-only branch edited in src/export.ts; next: npm run test:export -- empty; verify zero rows still produce the header.
+CSV quoting; src/parser.ts:61 escape handling edited, not verified; next: npm test -- quoted-field; check a quoted comma stays in one field.
 ```
 
-Answer the status question from the latest build result. If it reveals an
-unrelated warning, park that warning with its log location; do not begin
-its repair during the interruption. Mark the interruption done, reread
-the marker, and execute the exact test command. If it fails, continue
-from that result rather than rereading the entire export investigation.
+After answering status, run that command. The next action is verification,
+not making the same edit again or starting the next parser case. If the
+status question uncovers an unrelated build warning, park its log locator
+before returning.
+
+If someone changes the parser while you are away, the marker identifies
+the intended boundary but is now stale: inspect that diff, then run the
+proof against the current file. A marker saves reorientation; it does not
+make an old workspace snapshot authoritative.

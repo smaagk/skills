@@ -31,14 +31,23 @@ in parallel.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Turn nine pending items into a session plan.”
+**Request:** “I keep switching among nine half-finished tasks. Order tomorrow.”
 
-Choose at most six, each with a check: fix the export (acceptance test),
-review access (role matrix), update docs (link check), reconcile the issue
-tracker (status inspection), remove owned scratch files (directory
-inspection), and write the handoff (receiver can identify the next step).
-Keep the other three in the holding list. If export is blocked by a
-missing contract, record the blocker before moving to access review.
-At close, put the unfinished export first on tomorrow's list, then any
-other unfinished items; new requests compete for the remaining slots.
-Do not turn tomorrow's list into today's six plus three more.
+Use concrete checks, not “work on” labels. This three-item plan is enough:
+
+```text
+1. Restore search indexing — missing-page fixture passes.
+2. Finish mobile navigation — keyboard and touch walkthroughs pass.
+3. Prepare internal setup docs — link check passes and local preview is reviewed.
+Holding list: remaining six requests, with their existing issue locations.
+```
+
+Tomorrow, indexing is blocked on a missing sample file. Record that exact
+blocker before moving to navigation; do not alternate between them every
+few minutes. At close, navigation is done and docs have not started. The
+following plan begins with indexing, then docs; new requests compete for
+at most four remaining slots.
+
+Six is a ceiling, not a target. If the sample arrives while navigation is
+being finished, close navigation's check before reopening indexing. An
+arrival notification is not a reason to leave another item half-done.

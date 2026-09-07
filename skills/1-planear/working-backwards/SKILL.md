@@ -34,13 +34,22 @@ backwards accumulates only the necessary ones.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Let administrators export the invoices visible on screen.”
+**Request:** “Let me restore an archived note.”
 
-End state: “I download a CSV containing exactly the invoices selected by
-my current filters.” Proof: an acceptance test filters to March and
-compares downloaded IDs with the March fixture. Derive backwards:
-download preserves filters ← export endpoint applies those filters ←
-query returns the selected invoices ← invoice records already exist.
-Give the endpoint a response assertion and the query a fixture check.
-A chart dashboard and a new reporting framework are not prerequisites;
-record them as outside this chain rather than adding them to the plan.
+End state: “My restored note appears in the active list with its original
+text.” Proof: archive note 17, restore it, reload, and compare its text.
+Read backwards from that outcome:
+
+```text
+active list includes note 17     ← list query includes active records
+note 17 remains active on reload ← restore persists archived_at = null
+restore can address note 17      ← archived list exposes its ID
+today: notes and archived_at already exist
+```
+
+Check the list query with active and archived fixtures, persistence with a
+reload, and the archived list's ID with a rendering assertion. A new event
+bus and archive-history screen are not needed by this chain; record them
+as excluded. If archiving actually deletes the text, the chain breaks at
+“notes already exist”: recoverability must be solved before adding a
+restore button. The visible button alone is not the end state.

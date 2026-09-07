@@ -34,13 +34,18 @@ it that is not "a bit more".
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Spend 30 minutes investigating the flaky export test.”
+**Request:** “Spend at most 30 minutes finding why image uploads stall.”
 
-Set the deliverable before starting: either a reproduced cause with
-command output or an investigation report with the remaining uncertainty.
-At minute 15, suppose two timezone cases reproduce consistently but the
-CI-only failure does not. Drop the optional formatter comparison and
-record the cut; spend the remaining time comparing CI inputs with the
-local reproducer. At minute 30, hand over the evidence and state that the
-CI cause is still unproved if it is. Do not silently extend the budget
-or describe the investigation as a completed fix.
+Write the fallback first: a reproducer and cause if established, otherwise
+captured attempts and the next unresolved question. At minute 15, a 2 MB
+image passes while a 25 MB image stalls. The tempting next step is a full
+uploader rewrite; it cannot fit the remaining budget. Drop the optional
+progress-animation investigation and compare request and proxy logs for
+the large input.
+
+At minute 30, suppose the proxy logged the request but the upstream has
+no matching entry. Deliver those locators and label “proxy-to-upstream
+failure” a hypothesis, not a diagnosed cause or completed fix. That is
+the agreed fallback. If the request instead authorized fixing the bug
+without a time limit, do not invent this 30-minute stopping rule; the
+example's boundary comes from the user's investigation budget.

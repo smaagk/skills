@@ -32,13 +32,19 @@ a locator is "never".
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Close the session after the export change.”
+**Request:** “Close the session after updating the handbook search.”
 
-Sweep finds three loops: the build started but its result was unread; a
-retry defect was noticed outside scope; and the changed empty-export case
-has not been verified. Read the build result, run the focused export
-check, and file the retry defect with its reproducer and location as
-issue #73. End with the resulting state: “Build and empty-export check
-pass; retry defect remains open in #73.” If the build is still running,
-record its job locator and owner in the handoff. “I'll check it later”
-without that durable pointer does not close the loop.
+“I'll check the build and fix the accent issue later” leaves two intentions
+without state. Sweep the actual artifacts:
+
+| Open loop | Disposition |
+|---|---|
+| Build job 812 started; result unread | Read its result and record the job link |
+| Changed search index not verified | Run the agreed lookup-query check |
+| Accent handling defect outside this change | File issue #73 with query, expected page, and reproducer |
+
+If the first two checks pass, close with “build 812 and lookup check pass;
+accent defect remains in #73.” If build 812 is still running, report the
+change as awaiting that result and put the job locator and next action in
+the handoff. Recording pending work closes the memory loop; it does not
+make an unfinished build green or the delivery complete.

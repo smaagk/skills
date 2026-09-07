@@ -47,13 +47,21 @@ and a reason that has **expired** is the only good reason to remove it.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Remove the legacy-status fallback; it looks redundant.”
+**Request:** “Remove the missing-status fallback; current rows all have a status.”
 
-Fence: `src/status.ts:28` maps missing status to `pending`. The inline
-citation points to issue #42: “Imports before v2 have no status.” Inspect
-the issue and the later backfill migration. If the migration ran for all
-supported records and a query finds zero missing statuses, record
-**Expired**, cite that migration and query, then remove the fallback with
-its scenario covered. If old imports still arrive, record **Holds** and
-keep it. If the origin cannot be found, record **Unknown**; lack of a
-citation alone is not evidence that the branch is useless.
+Fence: `src/status.ts:28` maps missing status to `pending`. Normal fixtures
+already include status, so deleting it leaves their tests green.
+Issue #42 explains the builder's reason: v1 imports omit status.
+
+```text
+all stored rows backfilled + missing-status count = 0
+  ├─ v1 uploads still accepted → Holds: tomorrow's import needs the fallback
+  └─ v1 input retired in commit + backfill verified → Expired: remove with proof
+```
+
+The missing evidence is whether the old input can still arrive. Exercise
+a v1 fixture before deciding; today's database count cannot answer that.
+For an expired fence, cite the retirement commit and backfill proof in the
+removal marker. If the builder cannot be found, record **Unknown** and
+require the fence's own scenario and a reversible change before removal;
+green tests that never exercise missing status do not provide that proof.

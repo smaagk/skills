@@ -33,14 +33,21 @@ The review walks every other seat, including the one that wants to abuse it.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Review GET /invoices/17 for cross-tenant access.”
+**Request:** “The owner can download a document. Review everyone else's access.”
 
-Use invoice 17 belonging to resident A in tenant A. Try the same request
-as its owner, another resident in A, an administrator in A, a user in B,
-and an anonymous caller. Expected policy: owner and A's administrator can
-read it; other authenticated callers receive the same not-found response
-as for a nonexistent ID; anonymous callers receive an authentication
-error. Suppose B receives an amount: fix that isolation failure first,
-then rerun every seat. Also compare counts and error bodies for existing
-and nonexistent IDs. Record exact requests and results; a hidden UI link
-does not establish that the endpoint enforces the policy.
+Policy: document 17 is private to its owner and the workspace administrator.
+Probe `GET /documents/17` and nonexistent ID 999 with each identity:
+
+| Seat | ID 17, observed | ID 999, observed | Verdict |
+|---|---|---|---|
+| Owner | 200 + file | 404 | Intended access |
+| Administrator, same workspace | 200 + file | 404 | Intended access |
+| Other member, same workspace | 404 | 404 | No difference in these responses |
+| Member, different workspace | 403 “private document” | 404 | Leaks existence |
+| Anonymous | 401 | 401 | Authentication required |
+
+“No unauthorized download succeeded” misses the fourth row. Make forbidden
+and missing IDs indistinguishable for that caller, then rerun every seat
+so the owner still succeeds. Compare bodies, counts, and timing as separate
+probes before claiming wider isolation. Equal status codes alone establish
+only the status-code result, not absence of every inference channel.

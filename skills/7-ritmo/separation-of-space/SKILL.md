@@ -51,14 +51,24 @@ cross only by a deliberate, named move.
 Illustrative scenario; paths, commands, and results below are examples, not
 artifacts or measurements from this repository.
 
-**Request:** “Test a parser idea while preparing the real import feature.”
+**Request:** “Try a new image decoder while preparing the real upload feature.”
 
-Assign addresses: shipping in the `feature/import` checkout; experiments
-in a separate scratch directory; findings in `notes/import-investigation.md`
-outside both trees; decisions in `docs/import-spec.md`. Measure the parser
-in scratch. Record its memory behavior in notes, then settle the batch-size
-choice in the spec. Cross deliberately: cite the measurement in the
-report, use the agreed spec for implementation, and rewrite the adapter
-with tests in shipping. Do not copy the experiment into the feature.
-At close, delete scratch, file the notes, and inspect the shipping diff
-for production code and tests only.
+The experiment hard-codes one fixture and skips malformed images. “Copy it
+now and clean it up later” would move those assumptions into production.
+Give the artifacts explicit spaces:
+
+```text
+/work/upload/                    shipping checkout: real decoder adapter and tests
+/scratch/decoder-probe/           disposable measurements and experiment code
+/notes/decoder-investigation.md   retained command output and conclusions
+/design/upload-spec.md           agreed formats, limits, and failure behavior
+```
+
+The measurement crosses into notes as captured evidence; the format choice
+crosses into shipping through the agreed spec. Rewrite the adapter with
+malformed-input tests instead of copying the probe. At close, remove the
+owned scratch directory and retain the cited notes.
+
+If the task is already the first production slice with real boundaries
+and tests, put it in shipping from the start as a tracer bullet. A new
+implementation is not automatically an experiment.
