@@ -62,6 +62,28 @@ Mismo corte: agnósticas del harness, un principio con nombre, pasos con criteri
 | [`tracer-bullet`](skills/tracer-bullet/SKILL.md) | Pragmatic Programmer | Construir una capa entera antes de tocar la siguiente |
 | [`riskiest-assumption`](skills/riskiest-assumption/SKILL.md) | Lean | Probar al final la creencia que podía matar el plan al principio |
 
+## Productividad
+
+Mismo corte. Varias son pares deliberados: `two-minute-rule` es el contrapeso del *park*; `spike` ya tiene su timebox y `parkinson`
+lo generaliza; `satisficing` y `thirty-seven-percent` resuelven la misma parada con y sin posibilidad de volver atrás.
+
+| Skill | Principio | Corrige |
+|---|---|---|
+| [`eat-the-frog`](skills/eat-the-frog/SKILL.md) | Brian Tracy | Lo difícil se queda para cuando el contexto ya está lleno |
+| [`two-minute-rule`](skills/two-minute-rule/SKILL.md) | GTD | Estacionar trivialidades que costaban menos hacer que anotar |
+| [`ivy-lee`](skills/ivy-lee/SKILL.md) | Ivy Lee | Listas que se hojean y abren ítems en paralelo |
+| [`wip-limit`](skills/wip-limit/SKILL.md) | Kanban | Ramas, worktrees y PRs huérfanos que se acumulan |
+| [`parkinson`](skills/parkinson/SKILL.md) | Parkinson | "Casi termino" dicho dos veces |
+| [`definition-of-done`](skills/definition-of-done/SKILL.md) | Scrum | "Terminado" definido en cuatro sitios con diferencias |
+| [`zeigarnik`](skills/zeigarnik/SKILL.md) | Zeigarnik | El "luego lo hago" que muere con la sesión |
+| [`lab-notebook`](skills/lab-notebook/SKILL.md) | Cuaderno de laboratorio | Reportes reconstruidos de memoria |
+| [`interruption-marker`](skills/interruption-marker/SKILL.md) | Práctica del cirujano | Reorientación costosa tras una interrupción |
+| [`batching`](skills/batching/SKILL.md) | Batching | Alternar leer, editar y correr de uno en uno |
+| [`pareto`](skills/pareto/SKILL.md) | 80/20 | Diez nits arreglados y el bloqueador abierto |
+| [`maker-manager-schedule`](skills/maker-manager-schedule/SKILL.md) | Paul Graham | Revisar un diff con media atención en un monitor |
+| [`satisficing`](skills/satisficing/SKILL.md) | Herbert Simon | Búsqueda de alternativas sin condición de fin |
+| [`thirty-seven-percent`](skills/thirty-seven-percent/SKILL.md) | Optimal stopping | Elegir entre candidatos secuenciales sin regla de parada |
+
 ## Instalar
 
 Copia las carpetas que quieras a `.claude/skills/` de tu repo (o a `~/.claude/skills/` para uso global):
