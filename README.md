@@ -1,6 +1,6 @@
 # skills
 
-Cuarenta skills para Claude Code (y harnesses compatibles con `SKILL.md`), ordenadas por el ciclo de vida
+Cuarenta y dos skills para Claude Code (y harnesses compatibles con `SKILL.md`), ordenadas por el ciclo de vida
 de una pieza de trabajo: planear → decidir → implementar → diagnosticar → revisar → cerrar. La categoría 0
 es el harness que las orquesta; la 7 es transversal, el ritmo de la sesión. Cada skill es un principio con
 nombre propio convertido en pasos con criterio de terminado, según `/writing-great-skills`.
@@ -58,6 +58,7 @@ Algunas rutas de ejemplo vienen de un monorepo Nx + Angular + Supabase; ajústal
 | [`critical-path`](skills/1-planear/critical-path/SKILL.md) | Goldratt | Paralelizar y rescatar pasos fuera de la cadena crítica |
 | [`rolling-wave`](skills/1-planear/rolling-wave/SKILL.md) | Fog of war | Detallar lo que aún no se sabe y reescribirlo después |
 | [`spike`](skills/1-planear/spike/SKILL.md) | XP | Código escrito para aprender que termina en producción |
+| [`essentialism`](skills/1-planear/essentialism/SKILL.md) | McKeown, con minimalismo | Meterlo todo en vez de elegir; cortes silenciosos que vuelven como scope creep |
 | [`lindy`](skills/1-planear/lindy/SKILL.md) | Efecto Lindy | Elegir lo nuevo sin un hueco concreto que lo justifique |
 
 ## 2 · Decidir
@@ -116,13 +117,16 @@ Algunas rutas de ejemplo vienen de un monorepo Nx + Angular + Supabase; ajústal
 | [`parkinson`](skills/7-ritmo/parkinson/SKILL.md) | Parkinson | "Casi termino" dicho dos veces |
 | [`maker-manager-schedule`](skills/7-ritmo/maker-manager-schedule/SKILL.md) | Paul Graham | Revisar un diff con media atención en un monitor |
 | [`interruption-marker`](skills/7-ritmo/interruption-marker/SKILL.md) | Práctica del cirujano | Reorientación costosa tras una interrupción |
+| [`separation-of-space`](skills/7-ritmo/separation-of-space/SKILL.md) | Un espacio, un uso | Spikes en el árbol de entrega; diseño reabierto a mitad de implementación |
 | [`zeigarnik`](skills/7-ritmo/zeigarnik/SKILL.md) | Zeigarnik | El "luego lo hago" que muere con la sesión |
 
 ## Pares deliberados
 
 Varias skills existen en pareja y se nombran entre sí: `spike` (se tira) y `tracer-bullet` (se queda);
 `two-minute-rule` es el contrapeso del *park* de `frictionless-focus`; `parkinson` generaliza el timebox de `spike`;
-`satisficing` y `thirty-seven-percent` resuelven la misma parada con y sin vuelta atrás; `chestertons-fence` frena lo que
+`satisficing` y `thirty-seven-percent` resuelven la misma parada con y sin vuelta atrás;
+`essentialism` decide qué entra y `via-negativa` qué sale del código que ya existe; `separation-of-space` es el suelo
+que `spike` y `lab-notebook` asumen; `chestertons-fence` frena lo que
 `via-negativa` y la rúbrica thermo-nuclear empujan a quitar; `lindy` es la cerca aplicada a dependencias.
 
 ## Licencia
