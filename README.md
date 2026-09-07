@@ -1,9 +1,28 @@
 # skills
 
-Skills públicas para Claude Code (y harnesses compatibles con `SKILL.md`).
-Forman un harness de trabajo con reparto fijo de modelos: **Fable 5.1** orquesta,
-diseña, revisa y es la única mano en git/GitHub; **GPT-6 Astra** (Codex CLI) y
-**Opus 5** teclean; los jueces son de familias distintas para que fallen distinto.
+Cuarenta skills para Claude Code (y harnesses compatibles con `SKILL.md`), ordenadas por el ciclo de vida
+de una pieza de trabajo: planear → decidir → implementar → diagnosticar → revisar → cerrar. La categoría 0
+es el harness que las orquesta; la 7 es transversal, el ritmo de la sesión. Cada skill es un principio con
+nombre propio convertido en pasos con criterio de terminado, según `/writing-great-skills`.
+
+Solo las cinco del harness (0) se asumen entre sí. Las otras treinta y cinco son agnósticas: no suponen
+orquestador, worker ni herramienta, y no se cablean solas — se instalan y se invocan, o se apuntan desde
+tus propias skills.
+
+## Instalar
+
+```bash
+git clone https://github.com/smaagk/skills.git
+cp -r skills/skills/*/* .claude/skills/        # todas
+cp -r skills/skills/3-implementar/* .claude/skills/   # o una categoría
+```
+
+Cada carpeta de skill se copia entera (algunas traen archivos auxiliares). A `~/.claude/skills/` para uso global.
+
+## 0 · Harness
+
+Reparto fijo de modelos: **Fable 5.1** orquesta, diseña, revisa y es la única mano en git/GitHub; **GPT-6 Astra**
+(Codex CLI) y **Opus 5** teclean; los jueces son de familias distintas para que fallen distinto.
 
 | Rol | Modelo | Effort | Skill |
 |---|---|---|---|
@@ -16,94 +35,95 @@ diseña, revisa y es la única mano en git/GitHub; **GPT-6 Astra** (Codex CLI) y
 | Juez B (estructura) | Fable 5.1 / Opus 5 | n/a | `thermo-nuclear-code-quality-review` como rúbrica |
 | Seguridad / RLS, gates, evidencia, git | Fable 5.1 | n/a | `batch-conductor` |
 
-## Skills
-
 | Skill | Qué hace |
 |---|---|
-| [`batch-conductor`](skills/batch-conductor/SKILL.md) | Conduce uno o varios issues de principio a fin: autogrill, spec congelada, implementación delegada, revisión en lentes decorrelacionadas, evidencia visual, PR/CI/CodeRabbit, merge y cierre. |
-| [`orchestrate-opus`](skills/orchestrate-opus/SKILL.md) | Modo operativo: Fable orquesta, Opus implementa, Codex es worker mecánico y Juez A. Ciclo de siete pasos. |
-| [`codex-first`](skills/codex-first/SKILL.md) | Ruteo de implementación a Codex CLI (GPT-6 Astra) con spec congelada; Claude verifica. Modelo y effort siempre explícitos. |
-| [`opus-first`](skills/opus-first/SKILL.md) | Ruteo de implementación con juicio a subagentes Opus 5 (heredan el harness: CLAUDE.md, skills, MCP). |
-| [`opus-research`](skills/opus-research/SKILL.md) | Research de código con scouts Opus 5: Fable briefa, el scout lee y cita `path:line`, Fable debriefa. |
-| [`frictionless-focus`](skills/frictionless-focus/SKILL.md) | Disciplina de la mano que implementa: una unidad, una prueba, tangentes estacionadas, decisiones por precedente sin preguntas. Los workers (Opus o Codex) la cargan al recibir una spec congelada. |
-| [`chestertons-fence`](skills/chestertons-fence/SKILL.md) | Antes de quitar o rodear código existente: nombrar la cerca, encontrar al constructor (cita inline, `git log -S`, PR/issue, ADR, wiki), veredicto holds/expired/unknown, dejar marcador rastreable. El Juez B la aplica antes de proponer borrar. |
-| [`sbar`](skills/sbar/SKILL.md) | Handoff entre agentes o sesiones en cuatro bloques: Situation, Background, Assessment, Recommendation. Para `gt handoff`, HELP al Witness, notas de bead antes de morir y el Stopped-at de un reporte. |
-| [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Rúbrica de revisión estructural extrema (judo de código, megaarchivos, spaghetti). Lleva `disable-model-invocation`: se lee y se aplica, no se invoca. |
+| [`orchestrate-opus`](skills/0-harness/orchestrate-opus/SKILL.md) | Modo operativo: Fable orquesta, Opus implementa, Codex es worker mecánico y Juez A. Ciclo de siete pasos. |
+| [`batch-conductor`](skills/0-harness/batch-conductor/SKILL.md) | Conduce uno o varios issues de principio a fin: autogrill, spec congelada, implementación delegada, lentes decorrelacionadas, evidencia, PR/CI, merge y cierre. |
+| [`opus-research`](skills/0-harness/opus-research/SKILL.md) | Research de código con scouts Opus 5: Fable briefa, el scout lee y cita `path:line`, Fable debriefa. |
+| [`opus-first`](skills/0-harness/opus-first/SKILL.md) | Implementación con juicio en subagentes Opus 5, que heredan el harness (CLAUDE.md, skills, MCP). |
+| [`codex-first`](skills/0-harness/codex-first/SKILL.md) | Implementación mecánica en Codex CLI (GPT-6 Astra) con spec congelada; modelo y effort siempre explícitos. |
 
-## Principios como skills
+Dependencias externas del harness, de [mattpocock/skills](https://github.com/mattpocock/skills) y no republicadas aquí:
+`grill-with-docs` (con `grilling` y `domain-modeling`), `code-review` (dos ejes) y `resolving-merge-conflicts`.
+`codex-first` menciona `$maintainer-orchestrator` y `$autoreview` como referencias opcionales que no forman parte de este repo.
+Algunas rutas de ejemplo vienen de un monorepo Nx + Angular + Supabase; ajústalas.
 
-Independientes del harness anterior: no asumen orquestador, worker ni herramienta. Cada una es un principio con nombre propio en el
-entrenamiento del modelo, convertido en pasos con criterio de terminado.
+## 1 · Planear
 
 | Skill | Principio | Corrige |
 |---|---|---|
-| [`falsification`](skills/falsification/SKILL.md) | Popper, con Occam como paso | El fix que "funciona" sin diagnóstico probado |
-| [`survivorship-bias`](skills/survivorship-bias/SKILL.md) | Wald, los aviones | Fixtures y muestras que solo contienen los casos que volvieron |
-| [`pre-mortem`](skills/pre-mortem/SKILL.md) | Klein | Checklists que solo cubren lo que ya falló una vez |
-| [`veil-of-ignorance`](skills/veil-of-ignorance/SKILL.md) | Rawls | Políticas de acceso escritas desde el rol que las pidió |
-| [`steelman`](skills/steelman/SKILL.md) | Steelman | Rebatir la redacción débil de un hallazgo válido |
-| [`via-negativa`](skills/via-negativa/SKILL.md) | Taleb | Refactors que añaden antes de quitar |
-| [`lindy`](skills/lindy/SKILL.md) | Efecto Lindy | Elegir lo nuevo sin un hueco concreto que lo justifique |
-| [`hansei`](skills/hansei/SKILL.md) | Toyota | Cierres que atribuyen a la suerte lo que fue decisión propia |
-| [`five-whys`](skills/five-whys/SKILL.md) | Ohno | Lecciones que registran el síntoma y no la causa |
-| [`one-way-doors`](skills/one-way-doors/SKILL.md) | Bezos | Preguntar de más en lo reversible y de menos en lo irreversible |
+| [`working-backwards`](skills/1-planear/working-backwards/SKILL.md) | Amazon | Planes hacia adelante que acumulan pasos innecesarios |
+| [`riskiest-assumption`](skills/1-planear/riskiest-assumption/SKILL.md) | Lean | Probar al final la creencia que podía matar el plan al principio |
+| [`outside-view`](skills/1-planear/outside-view/SKILL.md) | Kahneman | Estimar desde el plan y no desde la clase de referencia |
+| [`critical-path`](skills/1-planear/critical-path/SKILL.md) | Goldratt | Paralelizar y rescatar pasos fuera de la cadena crítica |
+| [`rolling-wave`](skills/1-planear/rolling-wave/SKILL.md) | Fog of war | Detallar lo que aún no se sabe y reescribirlo después |
+| [`spike`](skills/1-planear/spike/SKILL.md) | XP | Código escrito para aprender que termina en producción |
+| [`lindy`](skills/1-planear/lindy/SKILL.md) | Efecto Lindy | Elegir lo nuevo sin un hueco concreto que lo justifique |
 
-## Planear y hacer spikes
-
-Mismo corte: agnósticas del harness, un principio con nombre, pasos con criterio de terminado.
+## 2 · Decidir
 
 | Skill | Principio | Corrige |
 |---|---|---|
-| [`working-backwards`](skills/working-backwards/SKILL.md) | Amazon | Planes escritos hacia adelante que acumulan pasos innecesarios |
-| [`outside-view`](skills/outside-view/SKILL.md) | Kahneman, planning fallacy | Estimar desde el plan y no desde la clase de referencia |
-| [`rolling-wave`](skills/rolling-wave/SKILL.md) | Fog of war | Detallar lo que aún no se sabe y reescribirlo después |
-| [`critical-path`](skills/critical-path/SKILL.md) | Goldratt | Paralelizar y rescatar pasos que no están en la cadena crítica |
-| [`spike`](skills/spike/SKILL.md) | XP | Código escrito para aprender que termina en producción |
-| [`tracer-bullet`](skills/tracer-bullet/SKILL.md) | Pragmatic Programmer | Construir una capa entera antes de tocar la siguiente |
-| [`riskiest-assumption`](skills/riskiest-assumption/SKILL.md) | Lean | Probar al final la creencia que podía matar el plan al principio |
+| [`one-way-doors`](skills/2-decidir/one-way-doors/SKILL.md) | Bezos | Preguntar de más en lo reversible y de menos en lo irreversible |
+| [`satisficing`](skills/2-decidir/satisficing/SKILL.md) | Herbert Simon | Búsqueda de alternativas sin condición de fin |
+| [`thirty-seven-percent`](skills/2-decidir/thirty-seven-percent/SKILL.md) | Optimal stopping | Candidatos secuenciales sin regla de parada (sin vuelta atrás) |
+| [`pre-mortem`](skills/2-decidir/pre-mortem/SKILL.md) | Klein | Checklists que solo cubren lo que ya falló una vez |
 
-## Productividad
-
-Mismo corte. Varias son pares deliberados: `two-minute-rule` es el contrapeso del *park*; `spike` ya tiene su timebox y `parkinson`
-lo generaliza; `satisficing` y `thirty-seven-percent` resuelven la misma parada con y sin posibilidad de volver atrás.
+## 3 · Implementar
 
 | Skill | Principio | Corrige |
 |---|---|---|
-| [`eat-the-frog`](skills/eat-the-frog/SKILL.md) | Brian Tracy | Lo difícil se queda para cuando el contexto ya está lleno |
-| [`two-minute-rule`](skills/two-minute-rule/SKILL.md) | GTD | Estacionar trivialidades que costaban menos hacer que anotar |
-| [`ivy-lee`](skills/ivy-lee/SKILL.md) | Ivy Lee | Listas que se hojean y abren ítems en paralelo |
-| [`wip-limit`](skills/wip-limit/SKILL.md) | Kanban | Ramas, worktrees y PRs huérfanos que se acumulan |
-| [`parkinson`](skills/parkinson/SKILL.md) | Parkinson | "Casi termino" dicho dos veces |
-| [`definition-of-done`](skills/definition-of-done/SKILL.md) | Scrum | "Terminado" definido en cuatro sitios con diferencias |
-| [`zeigarnik`](skills/zeigarnik/SKILL.md) | Zeigarnik | El "luego lo hago" que muere con la sesión |
-| [`lab-notebook`](skills/lab-notebook/SKILL.md) | Cuaderno de laboratorio | Reportes reconstruidos de memoria |
-| [`interruption-marker`](skills/interruption-marker/SKILL.md) | Práctica del cirujano | Reorientación costosa tras una interrupción |
-| [`batching`](skills/batching/SKILL.md) | Batching | Alternar leer, editar y correr de uno en uno |
-| [`pareto`](skills/pareto/SKILL.md) | 80/20 | Diez nits arreglados y el bloqueador abierto |
-| [`maker-manager-schedule`](skills/maker-manager-schedule/SKILL.md) | Paul Graham | Revisar un diff con media atención en un monitor |
-| [`satisficing`](skills/satisficing/SKILL.md) | Herbert Simon | Búsqueda de alternativas sin condición de fin |
-| [`thirty-seven-percent`](skills/thirty-seven-percent/SKILL.md) | Optimal stopping | Elegir entre candidatos secuenciales sin regla de parada |
+| [`frictionless-focus`](skills/3-implementar/frictionless-focus/SKILL.md) | Flow / single-piece flow | Preguntas que el repo respondía, tangentes, decisiones reabiertas |
+| [`tracer-bullet`](skills/3-implementar/tracer-bullet/SKILL.md) | Pragmatic Programmer | Construir una capa entera antes de tocar la siguiente |
+| [`batching`](skills/3-implementar/batching/SKILL.md) | Batching | Alternar leer, editar y correr de uno en uno |
+| [`two-minute-rule`](skills/3-implementar/two-minute-rule/SKILL.md) | GTD | Estacionar trivialidades que costaban menos hacer que anotar |
+| [`lab-notebook`](skills/3-implementar/lab-notebook/SKILL.md) | Cuaderno de laboratorio | Reportes reconstruidos de memoria |
 
-## Instalar
+## 4 · Diagnosticar
 
-Copia las carpetas que quieras a `.claude/skills/` de tu repo (o a `~/.claude/skills/` para uso global):
+| Skill | Principio | Corrige |
+|---|---|---|
+| [`falsification`](skills/4-diagnosticar/falsification/SKILL.md) | Popper, con Occam | El fix que "funciona" sin diagnóstico probado |
+| [`survivorship-bias`](skills/4-diagnosticar/survivorship-bias/SKILL.md) | Wald | Fixtures y muestras con solo los casos que volvieron |
+| [`five-whys`](skills/4-diagnosticar/five-whys/SKILL.md) | Ohno | Lecciones que registran el síntoma y no la causa |
 
-```bash
-git clone https://github.com/smaagk/skills.git
-cp -r skills/skills/* .claude/skills/
-```
+## 5 · Revisar
 
-## Dependencias externas
+| Skill | Principio | Corrige |
+|---|---|---|
+| [`thermo-nuclear-code-quality-review`](skills/5-revisar/thermo-nuclear-code-quality-review/SKILL.md) | Judo de código | Revisiones que aceptan "funciona" y dejan el diseño peor. Rúbrica, no se invoca |
+| [`chestertons-fence`](skills/5-revisar/chestertons-fence/SKILL.md) | Chesterton | Borrar guards, flags o helpers sin saber quién los puso |
+| [`via-negativa`](skills/5-revisar/via-negativa/SKILL.md) | Taleb | Refactors que añaden antes de quitar |
+| [`veil-of-ignorance`](skills/5-revisar/veil-of-ignorance/SKILL.md) | Rawls | Políticas de acceso escritas desde el rol que las pidió |
+| [`steelman`](skills/5-revisar/steelman/SKILL.md) | Steelman | Rebatir la redacción débil de un hallazgo válido |
+| [`pareto`](skills/5-revisar/pareto/SKILL.md) | 80/20 | Diez nits arreglados y el bloqueador abierto |
 
-`batch-conductor` compone tres skills de [mattpocock/skills](https://github.com/mattpocock/skills) que no se republican aquí:
-`grill-with-docs` (que a su vez usa `grilling` y `domain-modeling`), `code-review` (dos ejes: estándares y spec) y
-`resolving-merge-conflicts`. Instálalas desde ese repo con el mismo nombre.
+## 6 · Cerrar y entregar
 
-`codex-first` menciona `$maintainer-orchestrator` y `$autoreview` como referencias opcionales; no forman parte de este repo.
+| Skill | Principio | Corrige |
+|---|---|---|
+| [`definition-of-done`](skills/6-cerrar/definition-of-done/SKILL.md) | Scrum | "Terminado" definido en cuatro sitios con diferencias |
+| [`sbar`](skills/6-cerrar/sbar/SKILL.md) | Protocolo de enfermería | Handoffs y escaladas que obligan a leer el transcript |
+| [`hansei`](skills/6-cerrar/hansei/SKILL.md) | Toyota | Cierres que atribuyen a la suerte lo que fue decisión propia |
 
-Las skills asumen Codex CLI instalado (`codex exec`) y, para las de Opus, el Agent tool de Claude Code.
-Algunas rutas de ejemplo (`libs/shared/data-access`, `supabase/migrations`, lentes `ui/data/db/flow`) vienen de un monorepo
-Nx + Angular + Supabase; ajústalas a tu repo.
+## 7 · Ritmo de sesión (transversal)
+
+| Skill | Principio | Corrige |
+|---|---|---|
+| [`eat-the-frog`](skills/7-ritmo/eat-the-frog/SKILL.md) | Brian Tracy | Lo difícil se queda para cuando el contexto ya está lleno |
+| [`ivy-lee`](skills/7-ritmo/ivy-lee/SKILL.md) | Ivy Lee | Listas que se hojean y abren ítems en paralelo |
+| [`wip-limit`](skills/7-ritmo/wip-limit/SKILL.md) | Kanban | Ramas, worktrees y PRs huérfanos |
+| [`parkinson`](skills/7-ritmo/parkinson/SKILL.md) | Parkinson | "Casi termino" dicho dos veces |
+| [`maker-manager-schedule`](skills/7-ritmo/maker-manager-schedule/SKILL.md) | Paul Graham | Revisar un diff con media atención en un monitor |
+| [`interruption-marker`](skills/7-ritmo/interruption-marker/SKILL.md) | Práctica del cirujano | Reorientación costosa tras una interrupción |
+| [`zeigarnik`](skills/7-ritmo/zeigarnik/SKILL.md) | Zeigarnik | El "luego lo hago" que muere con la sesión |
+
+## Pares deliberados
+
+Varias skills existen en pareja y se nombran entre sí: `spike` (se tira) y `tracer-bullet` (se queda);
+`two-minute-rule` es el contrapeso del *park* de `frictionless-focus`; `parkinson` generaliza el timebox de `spike`;
+`satisficing` y `thirty-seven-percent` resuelven la misma parada con y sin vuelta atrás; `chestertons-fence` frena lo que
+`via-negativa` y la rúbrica thermo-nuclear empujan a quitar; `lindy` es la cerca aplicada a dependencias.
 
 ## Licencia
 
