@@ -31,3 +31,19 @@ coincidence with a commit message.
    the original failure and the prohibition from step 1.
    _Done when_: the original failure is green and Y still does not appear.
    A fix that needed a second change was a second hypothesis — go back to 1.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “The API returns an old invoice amount. Is it the response cache?”
+
+Hypothesis: “If only the response cache is stale, a direct database query
+cannot return the old amount.” Query the same invoice ID in a test
+environment, bypassing that cache. If it still returns the old amount,
+mark the cache-only hypothesis dead and investigate the write path.
+If storage contains the new amount while the cached response is old,
+the hypothesis survives, but is not yet proved. Check the invalidation
+path, fix the identified omission alone, then rerun the original update
+and request sequence plus the direct query. Both must show the new amount.

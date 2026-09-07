@@ -27,3 +27,20 @@ disappears, then what changes, and only then what is added.
    covered it.
    _Done when_: the diff's additions are each justified against step 1, and
    the net line count is reported.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Simplify the export service without changing its API.”
+
+Candidates: `src/export.ts:18`, a wrapper that only forwards to the
+serializer; `src/export.ts:42`, two identical branches; and
+`src/export.ts:70`, a retry guard. Remove the wrapper and collapse the
+branches one at a time, rerunning the export fixtures after each. Keep
+the retry guard because the transient-failure case still needs it. Only
+then consider additions: none are required if the direct serializer call
+preserves the API. Report the retained guard and the net change, for
+example −24 lines, alongside the passing checks. A smaller diff alone
+would not justify removing retry behavior.

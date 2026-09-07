@@ -28,3 +28,19 @@ know it is average.
    that difference moved a past member.
    _Done when_: each adjustment cites the difference and a past member, or
    the base rate stands. Report the final figure with the class beside it.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “This migration looks like two days. Estimate it.”
+
+Use three comparable migrations with recorded elapsed times: PR #101,
+4 days and 1 rework round; #108, 6 days and 2 rounds; #119, 11 days and
+3 rounds. Each had zero recorded incidents in the same 30-day follow-up
+window. The median is 6 days and the worst is 11, beside the inside-view
+estimate of 2. “We understand this one better” has no measured adjustment
+behind it, so report 6 days as the baseline and 11 as the observed worst,
+not a guaranteed upper bound. If those records are unavailable, report the
+missing evidence rather than inventing a reference class.

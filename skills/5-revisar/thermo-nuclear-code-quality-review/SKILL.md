@@ -192,3 +192,21 @@ Treat these as presumptive blockers unless the author can justify them clearly:
 - the PR duplicates an existing helper or puts logic in the wrong layer when there is a clear canonical home
 
 If those conditions are not met, leave explicit, actionable feedback and push for a cleaner decomposition.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Apply this rubric to the export diff; preserve its behavior.”
+
+Suppose `src/export.ts:240` adds a third format switch to a file growing
+from 940 to 1,080 lines. All three switches choose the same columns, and
+`src/columns.ts:18` already owns that mapping. A useful finding is:
+“Reuse the canonical column map and keep format serialization at the
+export boundary; this removes two decisions rather than moving three
+switches into helpers.” Cite those locations and the existing behavior
+fixtures for each format. Investigate any legacy branch's origin before
+recommending deletion. Treat the line threshold as supporting evidence;
+the actionable problem is duplicated ownership and branching, not merely
+the file's length. Report a proposal, not an unperformed refactor.

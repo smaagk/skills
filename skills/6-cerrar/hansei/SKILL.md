@@ -28,3 +28,20 @@ next run will read them.
    template, the project memory. A reflection kept in the closing summary
    is a reflection lost.
    _Done when_: each change has a locator in that place.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Reflect on why this small change needed three review rounds.”
+
+Separate the surprises: a one-off provider outage was outside our control;
+missing the tenant-switch scenario was our omission; repeating a rejected
+API shape was our failure to read the recorded decision. For the first
+controllable cause, add the tenant-switch case to
+`tests/cache-isolation.spec.ts`. For the second, link the accepted contract
+from the implementation template at `docs/templates/change.md:12`.
+Record each change with its locator. “Review more carefully” would not
+prevent either recurrence, and a lesson left only in the closing message
+would not reach the next implementation.

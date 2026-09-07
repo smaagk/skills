@@ -34,3 +34,25 @@ section of an implementation report.
 _Done when_: read it as the receiver — can they act from these four blocks
 alone, and does every fact in Background open to something? A block that
 fails either test is rewritten, not padded.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Hand off the failing empty-export test to the next session.”
+
+**Situation** — On branch `fix/empty-export`, `npm run test:export` fails
+for an empty result; the fix is not ready.
+
+**Background** — `docs/export-contract.md:12` requires a header-only CSV.
+`tests/export.spec.ts:44` exercises zero rows. The latest command output
+is in `notes/export-run.txt:8`: expected headers, received an empty string.
+The contract excludes changing the column order (`docs/export-contract.md:15`).
+
+**Assessment** — The early return in `src/export.ts:31` likely bypasses
+header serialization; confidence is medium until that path is exercised.
+Nonempty exports have not been rerun since the last edit.
+
+**Recommendation** — Inspect that early return against the header-only
+contract and rerun the export suite after a focused fix.

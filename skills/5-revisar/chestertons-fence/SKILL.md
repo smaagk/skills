@@ -41,3 +41,19 @@ and a reason that has **expired** is the only good reason to remove it.
    <command>`. The next agent finds the why in place, not in a dead
    conversation.
    _Done when_: the marker cites a locator a stranger can open.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Remove the legacy-status fallback; it looks redundant.”
+
+Fence: `src/status.ts:28` maps missing status to `pending`. The inline
+citation points to issue #42: “Imports before v2 have no status.” Inspect
+the issue and the later backfill migration. If the migration ran for all
+supported records and a query finds zero missing statuses, record
+**Expired**, cite that migration and query, then remove the fallback with
+its scenario covered. If old imports still arrive, record **Holds** and
+keep it. If the origin cannot be found, record **Unknown**; lack of a
+citation alone is not evidence that the branch is useless.

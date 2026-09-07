@@ -51,3 +51,19 @@ When the spec is silent: repo precedent → the unit's non-goals (leave it out)
 → the smallest reversible choice. Record the choice in the report. Ask only
 when all three hold — not inferable from the repo, materially different
 behaviours, expensive to undo — and ask once, with the options laid out.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Implement the agreed empty state for the invoice list.”
+
+Frame the unit: empty results show the agreed message; proof is
+`npm test -- invoice-list`; no filter redesign. Run the proof first, then
+read `src/invoice-list.ts:48`, its test, and the existing empty-state
+pattern in `src/payment-list.ts:35`. Follow that pattern for markup and
+accessibility, add the empty-result assertion, and capture a fresh passing
+run. An unrelated duplicated filter helper becomes a parked finding with
+its location. The report lists the two changed files, proof output,
+precedent, and parked helper; it does not reopen the frozen message copy.

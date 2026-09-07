@@ -28,3 +28,20 @@ and a chance to be forgotten.
    piece opens until the count is at or under the ceiling.
    _Done when_: count ≤ limit, and each closed piece has its disposition
    recorded.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Start a third feature while two others are open.”
+
+Use `git branch --no-merged`, `git worktree list`, and the project's issue
+and PR listings to inventory work and ages. Suppose export (3 days) and
+invitations (1 day) each have a branch, worktree, and PR; group those
+artifacts into two active pieces and list their associated servers too.
+The written ceiling is two. Starting another would make three, so finish
+export and record its delivered state before opening the new feature.
+Clean up only its owned, no-longer-needed resources. The count returns to
+two after the new feature starts; neither deleting an unmerged branch nor
+ignoring a blocked task constitutes finishing it.

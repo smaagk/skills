@@ -28,3 +28,19 @@ backwards accumulates only the necessary ones.
    no step of the chain requires is out of scope — record it as such.
    _Done when_: the plan holds only chain steps, and the cut items are
    listed with the reason "not on the chain".
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Let administrators export the invoices visible on screen.”
+
+End state: “I download a CSV containing exactly the invoices selected by
+my current filters.” Proof: an acceptance test filters to March and
+compares downloaded IDs with the March fixture. Derive backwards:
+download preserves filters ← export endpoint applies those filters ←
+query returns the selected invoices ← invoice records already exist.
+Give the endpoint a response assertion and the query a fixture check.
+A chart dashboard and a new reporting framework are not prerequisites;
+record them as outside this chain rather than adding them to the plan.

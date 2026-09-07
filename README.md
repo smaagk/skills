@@ -5,9 +5,13 @@ de una pieza de trabajo: planear → decidir → implementar → diagnosticar �
 es el harness que las orquesta; la 7 es transversal, el ritmo de la sesión. Cada skill es un principio con
 nombre propio convertido en pasos con criterio de terminado, según `/writing-great-skills`.
 
-Solo las cinco del harness (0) se asumen entre sí. Las otras treinta y cinco son agnósticas: no suponen
+Solo las cinco del harness (0) se asumen entre sí. Las otras treinta y siete son agnósticas: no suponen
 orquestador, worker ni herramienta, y no se cablean solas — se instalan y se invocan, o se apuntan desde
 tus propias skills.
+
+Cada skill fuera de `0-harness` incluye una sección `Example` con una petición y su
+aplicación concreta. Las rutas, comandos, cifras y resultados de esos ejemplos son
+ilustrativos; adáptalos al proyecto donde invoques la skill.
 
 ## Instalar
 

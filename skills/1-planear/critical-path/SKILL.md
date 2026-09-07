@@ -29,3 +29,18 @@ good as the care taken along it.
    disjoint by surface.
    _Done when_: the plan's order starts the path immediately, and every
    parallel pair is disjoint by surface. When late, look only at the path.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Sequence an invoice export and its help page.”
+
+The export contract takes 1 day; the service needs that contract and takes
+2 days; the UI needs the service and takes 1 day. The help page takes
+1 day independently, and release waits for both paths. The critical path is
+contract → service → UI → release (4 days); the help page has 3 days of
+slack. Start the contract first. The help page can run alongside it only
+if it touches separate files and needs no time from the contract owner.
+Finishing the help page early does not bring release forward.

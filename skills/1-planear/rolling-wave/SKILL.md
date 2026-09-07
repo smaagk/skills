@@ -28,3 +28,19 @@ lands.
    next wave.
    _Done when_: the milestone list is updated with a note of what changed
    and why, before the next wave is written.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Plan a migration from legacy exports with an unknown schema.”
+
+Milestones: representative files are understood (field inventory checked
+against samples); conversion preserves required data (reconciliation
+passes); consumers can use the new format (acceptance check passes).
+Detail only the first wave: inspect `samples/export-a.csv` and
+`samples/export-b.csv`, list headers and nulls, and compare the inventory
+with both files. Do not choose the converter's implementation yet. If the
+samples reveal two schema versions, record that discovery, split the
+conversion milestone by version, and detail the next wave from those facts.

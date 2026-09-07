@@ -25,3 +25,20 @@ in parallel.
 3. **Carry, don't grow.** At close, unfinished items head tomorrow's list;
    new items compete for the remaining slots.
    _Done when_: tomorrow's six are written, unfinished first.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Turn nine pending items into a session plan.”
+
+Choose at most six, each with a check: fix the export (acceptance test),
+review access (role matrix), update docs (link check), reconcile the issue
+tracker (status inspection), remove owned scratch files (directory
+inspection), and write the handoff (receiver can identify the next step).
+Keep the other three in the holding list. If export is blocked by a
+missing contract, record the blocker before moving to access review.
+At close, put the unfinished export first on tomorrow's list, then any
+other unfinished items; new requests compete for the remaining slots.
+Do not turn tomorrow's list into today's six plus three more.

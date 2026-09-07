@@ -31,3 +31,19 @@ Fail any one → park it.
    the unit.
    _Done when_: the discovery is either edited-and-noted or parked, and no
    more than a minute of context was spent deciding.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “While fixing the empty state, I found a misspelled test label
+and a helper that mishandles nulls.”
+
+For the label: one obvious single-file edit, yes; existing proof covers
+it, yes; no other behavior changes, yes; no separate review explanation,
+yes. Correct it and record “two-minute: corrected empty-state test label.”
+For the null helper: a fix needs a new regression case and may change
+other callers, so the proof and behavior checks are no. Park it with its
+location and return to the empty state. Its small line count does not
+make it a two-minute fix.

@@ -24,3 +24,22 @@ and a one-line marker removes most of it.
 3. **Return by the marker.** Re-read the line, run the "next action" from
    it — not from memory of what you think you were doing.
    _Done when_: the next action from the marker has been executed.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Pause the export fix to answer a build-status question.”
+
+Before switching, write the marker:
+
+```text
+Invoice export; header-only branch edited in src/export.ts; next: npm run test:export -- empty; verify zero rows still produce the header.
+```
+
+Answer the status question from the latest build result. If it reveals an
+unrelated warning, park that warning with its log location; do not begin
+its repair during the interruption. Mark the interruption done, reread
+the marker, and execute the exact test command. If it fails, continue
+from that result rather than rereading the entire export investigation.

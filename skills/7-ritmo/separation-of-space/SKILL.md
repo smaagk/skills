@@ -45,3 +45,20 @@ cross only by a deliberate, named move.
    only shipping changes.
    _Done when_: `git status` on shipping shows only shipping work, and
    scratch and notes each have a disposition.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Test a parser idea while preparing the real import feature.”
+
+Assign addresses: shipping in the `feature/import` checkout; experiments
+in a separate scratch directory; findings in `notes/import-investigation.md`
+outside both trees; decisions in `docs/import-spec.md`. Measure the parser
+in scratch. Record its memory behavior in notes, then settle the batch-size
+choice in the spec. Cross deliberately: cite the measurement in the
+report, use the agreed spec for implementation, and rewrite the adapter
+with tests in shipping. Do not copy the experiment into the feature.
+At close, delete scratch, file the notes, and inspect the shipping diff
+for production code and tests only.

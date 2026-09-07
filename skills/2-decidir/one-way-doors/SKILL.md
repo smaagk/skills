@@ -43,3 +43,19 @@ Everything else is a two-way door.
 A project keeps its own list of one-way doors (branches, environments,
 commands) beside this skill, so the test is never re-derived under
 pressure. Absent a list, the test above is the list.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Prepare the migration; I have not authorized production execution.”
+
+Classify creating a local migration file as two-way: the edit can be
+reverted cheaply. Write and validate it, then record that choice.
+Classify dropping the production column as one-way: it destroys values
+unless another copy holds them and changes production state. Present the
+concrete migration, the affected data, and the options: retain the column
+for now, or approve its removal after verifying the backup and recovery
+path. Stop before production execution. Preparing the file is complete;
+permission to prepare it is not permission to run the destructive step.

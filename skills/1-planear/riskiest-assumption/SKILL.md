@@ -27,3 +27,20 @@ expensive.
    building.
    _Done when_: the top assumption has evidence and a verdict, and the plan
    is updated or abandoned accordingly. Then take the next one.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Plan an audit-log integration with this provider.”
+
+Rank the unverified claims: deleted records remain available for 90 days
+(unknown × plan dead if false); pagination sustains the required volume
+(unknown × rework); timestamps use UTC (well-established × local fix).
+Test retention first using the provider's sandbox: delete a synthetic
+record and query the audit endpoint for its ID. Suppose the endpoint
+omits it and the retention documentation confirms deletions are excluded.
+Reject the retention assumption and change the plan to capture deletion
+events separately before building the importer. A successful pagination
+test would not rescue the original plan.

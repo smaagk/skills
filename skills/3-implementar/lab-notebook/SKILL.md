@@ -27,3 +27,26 @@ time — dull, complete, and unedited.
    notebook are resolved in the notebook's favour.
    _Done when_: each result in the report traces to an entry, and the
    notebook is kept alongside the report or discarded deliberately.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Investigate why the export test fails only in one timezone.”
+
+Create a notebook outside the delivery tree with the goal and start time.
+Record entries as they happen, including the failed run:
+
+```text
+Goal: reproduce export date boundary. Started 2026-01-12T10:00:00Z.
+10:01:00Z | TZ=UTC npm test -- export-date
+Captured stdout: PASS export-date; Tests: 1 passed, 1 total
+Conclusion: UTC does not reproduce.
+10:02:00Z | TZ=America/Mexico_City npm test -- export-date
+Captured stdout: FAIL export-date; Expected: 2026-01-01; Received: 2025-12-31
+Conclusion: the configured timezone changes the observed day.
+```
+
+These are short illustrative outputs; retain the full actual output in a
+real run. Cite the 10:02 entry in the report and file the notebook with it.

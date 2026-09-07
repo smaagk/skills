@@ -27,3 +27,19 @@ before issuing the first item.
    deciding the next batch; do not react to the first result while the
    rest are pending.
    _Done when_: the next batch is planned from the full set of results.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Rename a request field across its schema, client, and tests.”
+
+First group independent reads: the schema, client adapter, affected tests,
+and their configuration. Read all results before deciding the edits. The
+schema determines a generated type, so change the schema, run generation,
+then adapt the client and tests to the generated result; generation is
+not independent of the schema edit. Run lint and unit tests together if
+neither consumes the other's output or shares a mutable fixture. Inspect
+both results before deciding the next change. A failed generator must not
+be hidden by a passing lint result.

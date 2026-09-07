@@ -29,3 +29,22 @@ cannot, because a checklist only holds what already failed once.
    guard you add, or a rollback you rehearse — with the command.
    _Done when_: each such story has a mitigation with a command, or an
    explicit acceptance of the risk with the reason. Then proceed.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Review tomorrow's account backfill before it runs.”
+
+Scene: support notices missing account access after the production backfill.
+Three distinct failure stories:
+
+| Trigger and first symptom | Notice | Likelihood / undo | Mitigation in the example project |
+|---|---|---|---|
+| Tenant filter omitted; another tenant's owner changes | Next login, 1 hour | Plausible / data loss | `npm run test:backfill -- tenant-isolation` |
+| One large transaction; writes queue behind its lock | 1 minute | Seen before / hours | `npm run rehearse:backfill -- --batch-size=100` on staging |
+| Retry reapplies an assignment; ownership flips back | Next retry, 10 minutes | Plausible / hours | `npm run test:backfill -- retry-idempotency` |
+
+Capture each check's result. If isolation fails, repair and rerun it before
+the backfill; listing the risk alone is not mitigation.

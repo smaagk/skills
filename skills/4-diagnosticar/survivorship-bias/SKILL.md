@@ -26,3 +26,20 @@ sample and "no one has complained" is a set of survivors.
    fixture, test, or query that would surface it.
    _Done when_: each class from step 2 has a case with a locator, or is
    marked out of scope with the reason.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “All uploaded CSVs look valid in our logs. Is import coverage enough?”
+
+Selection: these logs are emitted only after parsing succeeds. They omit
+files rejected by the decoder, rows that crash parsing, and users who
+abandon before upload. Add an invalid-encoding fixture at
+`tests/fixtures/invalid-encoding.csv`, an unterminated-quote fixture at
+`tests/fixtures/unterminated.csv`, and an upload-cancel test at
+`tests/upload-cancel.spec.ts`. Verify the first two surface controlled
+errors and cancellation leaves no partial import. The successful-import
+logs still support the happy path; they cannot support a claim about
+inputs that never reached the logging statement.

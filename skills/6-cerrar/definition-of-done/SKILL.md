@@ -34,3 +34,20 @@ temp files). No prose.
 3. **Close only on all-pass.** A unit with a failing line is not done;
    it is "done except <line>", reported that way.
    _Done when_: the report states all-pass, or names the failing lines.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Can we close this invoice-export change?”
+
+The project already requires lint, the export acceptance test, a build,
+an attached CSV fixture, and an updated issue. Its single
+`DEFINITION_OF_DONE.md` points to the exact commands and inspection steps;
+the PR template links to that file. Run each line and capture results.
+Suppose lint, build, fixture inspection, and issue status pass, but
+`npm run test:export` fails on the empty result. Report “done except the
+empty-export acceptance check” and leave the work open. After repairing
+that case and checking all applicable lines, close against the same
+checklist instead of inventing a shorter one in the report.

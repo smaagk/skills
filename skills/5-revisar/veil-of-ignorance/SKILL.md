@@ -27,3 +27,20 @@ The review walks every other seat, including the one that wants to abuse it.
    opens another.
    _Done when_: every seat's answer is "nothing", each backed by a captured
    result.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Review GET /invoices/17 for cross-tenant access.”
+
+Use invoice 17 belonging to resident A in tenant A. Try the same request
+as its owner, another resident in A, an administrator in A, a user in B,
+and an anonymous caller. Expected policy: owner and A's administrator can
+read it; other authenticated callers receive the same not-found response
+as for a nonexistent ID; anonymous callers receive an authentication
+error. Suppose B receives an amount: fix that isolation failure first,
+then rerun every seat. Also compare counts and error bodies for existing
+and nonexistent IDs. Record exact requests and results; a hidden UI link
+does not establish that the endpoint enforces the policy.

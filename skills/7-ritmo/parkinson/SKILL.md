@@ -28,3 +28,19 @@ it that is not "a bit more".
    for more budget is a new decision for the receiver, made on that
    report — not a default.
    _Done when_: the deliverable is handed over at or before the budget.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Spend 30 minutes investigating the flaky export test.”
+
+Set the deliverable before starting: either a reproduced cause with
+command output or an investigation report with the remaining uncertainty.
+At minute 15, suppose two timezone cases reproduce consistently but the
+CI-only failure does not. Drop the optional formatter comparison and
+record the cut; spend the remaining time comparing CI inputs with the
+local reproducer. At minute 30, hand over the evidence and state that the
+CI cause is still unproved if it is. Do not silently extend the budget
+or describe the investigation as a completed fix.

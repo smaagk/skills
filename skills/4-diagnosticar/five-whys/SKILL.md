@@ -28,3 +28,20 @@ teaches them to prevent it.
    changeable cause first, the symptom as the way to recognise it, and the
    change made or proposed.
    _Done when_: the recorded lesson leads with the cause.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Our integration job has hung three times this week. Record a lesson.”
+
+Observed symptom: three jobs timed out after 10 minutes. Chain the evidence:
+why no exit? A test waits for a server response (`logs/job-3.txt:80`). Why
+no response? Its fixture server never started (`logs/job-3.txt:12`). Why
+not? The port was occupied by a prior fixture process (`logs/ports.txt:2`).
+Why did that process remain? Cleanup runs only on success
+(`tests/server-fixture.ts:44`). Stop at that controllable default. Propose
+cleanup in a finally block and verify a failing test releases the port.
+The lesson leads with “fixture cleanup skipped failure paths,” retaining
+“10-minute timeout” as the recognition symptom.

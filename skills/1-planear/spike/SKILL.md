@@ -33,3 +33,20 @@ ruin a spike, because code written to learn was not written to live.
    piece of work.
    _Done when_: the answer is filed where the plan reads it, and the spike
    code is gone.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Can the parser stream a 500 MB export within 100 MB of memory?”
+
+Question and proof: measure peak memory while consuming a synthetic
+500 MB fixture without retaining rows. Budget: two attempts; fallback:
+streaming support remains unproven and implementation stays blocked on
+that choice. Work in a dedicated scratch directory outside the delivery
+tree. Suppose the first attempt retains rows and peaks at 620 MB; the
+second consumes them incrementally and peaks at 76 MB. Record both
+commands and measurements, answer yes for that fixture and environment,
+and delete the experiment. Implement the production adapter separately
+with its own error handling and tests.

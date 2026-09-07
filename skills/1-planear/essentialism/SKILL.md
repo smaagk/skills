@@ -35,3 +35,19 @@ the essential completely, not the most that fits.
    criterion — no options, flags, or generality the criterion did not
    ask for.
    _Done when_: each yes is met, and nothing was built for a no.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Scope a first release with CSV export, charts, scheduled
+emails, and themes. Recommend what belongs in it.”
+
+Criterion: “Can an administrator reconcile this month's invoices without
+retyping them?” Score CSV export 100, charts 45, scheduled emails 30, and
+themes 5. Propose CSV export alone: date range, required columns, and a
+check against known invoice totals. Record the other three as no, with
+their scores and reasons in the scope proposal. A generic report builder
+is unnecessary for that yes. These scores support the proposed scope;
+they do not silently cancel requirements the requester already committed to.

@@ -26,3 +26,18 @@ cannot be recalled.
    candidate better than the running best is the choice. If none appears,
    the last candidate is taken — that is the known cost of the rule.
    _Done when_: a choice is made and the log shows the threshold it beat.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Choose one of ten sequential, one-time offers in a simulation;
+an offer expires as soon as we pass.”
+
+Fix n = 10 and use the simulation's score as the ranking criterion.
+Observe the first ⌈0.37 × 10⌉ = 4 without choosing: 42, 70, 55, 63.
+The benchmark is 70. Offer 5 scores 68, so pass; offer 6 scores 74,
+so take it and stop. If offers 5–9 never beat 70, take offer 10 as the
+stated fallback even if worse. If earlier offers remain available, this
+example's no-recall condition fails; use satisficing instead.

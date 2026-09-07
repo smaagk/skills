@@ -27,3 +27,20 @@ cannot have yet. Novelty is a cost to be justified, not a feature.
    _Done when_: the decision cites the gap from step 2 against the price
    from step 3, and the reason is recorded where the next chooser will
    find it.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Should we replace our CSV parser with the newer one?”
+
+Suppose the evidence shows: incumbent, 8 years old, 3 years in this repo,
+4 ecosystem majors survived, maintained; candidate, 1 year old, absent
+from this repo, 1 major survived, maintained. The required multiline-field
+fixture in `tests/csv/multiline.csv` already passes with the incumbent.
+There is no concrete capability gap, so retain it and record the fixture
+in the decision. If that fixture failed, compare the candidate's result
+against the migration cost: 6 callers, parser regression tests, and a
+lockfile-and-adapter revert. Age informs the choice; it does not replace
+testing the required behavior.

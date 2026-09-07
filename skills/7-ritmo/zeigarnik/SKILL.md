@@ -26,3 +26,19 @@ a locator is "never".
    what is true now; any "I will" has been converted into a written item.
    _Done when_: the closing text contains no future-tense commitment
    without a locator.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Close the session after the export change.”
+
+Sweep finds three loops: the build started but its result was unread; a
+retry defect was noticed outside scope; and the changed empty-export case
+has not been verified. Read the build result, run the focused export
+check, and file the retry defect with its reproducer and location as
+issue #73. End with the resulting state: “Build and empty-export check
+pass; retry defect remains open in #73.” If the build is still running,
+record its job locator and owner in the handoff. “I'll check it later”
+without that durable pointer does not close the loop.

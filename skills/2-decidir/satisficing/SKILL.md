@@ -26,3 +26,19 @@ looking, or the search never ends.
    criteria it met, and how many options were examined. Options not
    examined are not listed as rejected — they were not looked at.
    _Done when_: the decision cites the threshold, not a comparison.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Choose a date formatter for these receipts.”
+
+Before looking, write the threshold: Spanish month names, an explicit
+Mexico City timezone, correct day around UTC midnight, and no additional
+runtime dependency. Evaluate the platform formatter already used by the
+repo first. Suppose its output passes the locale and boundary fixtures;
+choose it and stop. Record “1 option examined; all four criteria pass.”
+Do not claim other libraries were rejected or build a comparison matrix
+for options never inspected. If the boundary fixture fails, continue to
+the next cheapest option using the same threshold.

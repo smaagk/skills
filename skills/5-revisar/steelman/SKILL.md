@@ -26,3 +26,19 @@ round anyway, with interest.
    changed; or: it fails — say why, citing the result from step 2 and the
    strong version you tested, so the author sees you argued their best case.
    _Done when_: the reply quotes the strong version and the evidence.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “The reviewer says this cache is unsafe, but it clears on logout.”
+
+Strong version: “A user can switch tenants without logging out. A cache
+key containing only the invoice ID could then reuse the previous tenant's
+result.” Exercise that scenario with two tenants sharing a local invoice
+ID: fetch in A, switch to B, then fetch again. If A's data appears, the
+finding holds despite the logout behavior. Scope the key by tenant and
+verify the transition again. Reply with the scenario, captured failing
+result, and passing regression. If isolation already holds, rebut with
+that same scenario's evidence rather than only citing logout cleanup.

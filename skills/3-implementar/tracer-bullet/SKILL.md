@@ -25,3 +25,19 @@ the first real version, thin enough to see where it lands.
    each as its own change, each extending the tracer's test.
    _Done when_: every case in the plan is reached by extending the tracer,
    and no layer was rebuilt from scratch.
+
+## Example
+
+Illustrative scenario; paths, commands, and results below are examples, not
+artifacts or measurements from this repository.
+
+**Request:** “Build a maintenance-request form that saves to storage.”
+
+Pick one path: entering “Leaking tap” and submitting produces a persisted
+request with that title, then shows its ID. Layers: form → client service
+→ endpoint → database → confirmation. Implement the minimum real path in
+each layer, retaining the required authentication and authorization, and
+run one integration test through it. This code stays in the delivery
+branch. Extend that same path with validation errors, network failures,
+and the empty description case in subsequent changes. Do not build every
+form option first or substitute a mock database for the path being proven.
