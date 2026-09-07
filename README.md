@@ -30,6 +30,24 @@ diseña, revisa y es la única mano en git/GitHub; **GPT-6 Astra** (Codex CLI) y
 | [`sbar`](skills/sbar/SKILL.md) | Handoff entre agentes o sesiones en cuatro bloques: Situation, Background, Assessment, Recommendation. Para `gt handoff`, HELP al Witness, notas de bead antes de morir y el Stopped-at de un reporte. |
 | [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Rúbrica de revisión estructural extrema (judo de código, megaarchivos, spaghetti). Lleva `disable-model-invocation`: se lee y se aplica, no se invoca. |
 
+## Principios como skills
+
+Independientes del harness anterior: no asumen orquestador, worker ni herramienta. Cada una es un principio con nombre propio en el
+entrenamiento del modelo, convertido en pasos con criterio de terminado.
+
+| Skill | Principio | Corrige |
+|---|---|---|
+| [`falsification`](skills/falsification/SKILL.md) | Popper, con Occam como paso | El fix que "funciona" sin diagnóstico probado |
+| [`survivorship-bias`](skills/survivorship-bias/SKILL.md) | Wald, los aviones | Fixtures y muestras que solo contienen los casos que volvieron |
+| [`pre-mortem`](skills/pre-mortem/SKILL.md) | Klein | Checklists que solo cubren lo que ya falló una vez |
+| [`veil-of-ignorance`](skills/veil-of-ignorance/SKILL.md) | Rawls | Políticas de acceso escritas desde el rol que las pidió |
+| [`steelman`](skills/steelman/SKILL.md) | Steelman | Rebatir la redacción débil de un hallazgo válido |
+| [`via-negativa`](skills/via-negativa/SKILL.md) | Taleb | Refactors que añaden antes de quitar |
+| [`lindy`](skills/lindy/SKILL.md) | Efecto Lindy | Elegir lo nuevo sin un hueco concreto que lo justifique |
+| [`hansei`](skills/hansei/SKILL.md) | Toyota | Cierres que atribuyen a la suerte lo que fue decisión propia |
+| [`five-whys`](skills/five-whys/SKILL.md) | Ohno | Lecciones que registran el síntoma y no la causa |
+| [`one-way-doors`](skills/one-way-doors/SKILL.md) | Bezos | Preguntar de más en lo reversible y de menos en lo irreversible |
+
 ## Instalar
 
 Copia las carpetas que quieras a `.claude/skills/` de tu repo (o a `~/.claude/skills/` para uso global):
